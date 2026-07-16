@@ -110,6 +110,7 @@ class TestGuards(unittest.TestCase):
         with self.assertRaises(guards.GuardError):
             guards.validate_dir(self.tmp + "/nope", "read")
 
+    @unittest.skipIf(os.name == "nt", "POSIX path not absolute on Windows")
     def test_read_mode_allows_protected(self):
         self.assertEqual(guards.validate_dir("/etc", "read"), Path("/etc"))
 

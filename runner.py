@@ -296,6 +296,7 @@ def get_version(bin_path: str | None = None, timeout: float = 20.0) -> str:
     out = subprocess.run(
         [bin_, "--version"],
         capture_output=True,
+        stdin=subprocess.DEVNULL,  # else opencode inherits the MCP stdio pipe and hangs
         encoding="utf-8",
         errors="replace",
         timeout=timeout,
@@ -310,6 +311,7 @@ def list_models(
     out = subprocess.run(
         [bin_, "models"],
         capture_output=True,
+        stdin=subprocess.DEVNULL,  # else opencode inherits the MCP stdio pipe and hangs
         encoding="utf-8",
         errors="replace",
         timeout=timeout,
